@@ -1,0 +1,63 @@
+class Solution {
+    
+    //first we are making a function to return common prefix of two strings
+    
+     public String commonPrefixUtil(String str1,String str2)
+    {
+        String result="";
+        
+        for(int i=0,j=0;i<str1.length() && j<str2.length();i++,j++)
+        {
+            if(str1.charAt(i)  != str2.charAt(j))
+            {
+                break;     //in instance any character is not same break loop immediately
+            }
+            result+=str1.charAt(i);  //stores the common prefix
+        }
+        return result;  //result will store the common string
+    }
+    
+    
+    //function by leetcode 
+    
+    public String longestCommonPrefix(String[] strs) {
+        
+     //insertion sort
+        for (int i=1 ;i<strs.length; i++)
+        {
+            String temp = strs[i];
+
+            // Insert s[j] at its correct position
+            int j = i - 1;
+            while (j >= 0 && temp.length() < strs[j].length())
+            {
+                strs[j+1] = strs[j]; //reverse bubble process
+                j--;
+            }
+            strs[j+1] = temp;
+        }
+
+        
+        String prefix=strs[strs.length-1]; //starts from last element of array
+        
+        for(int i=strs.length-2;i>=0;i--)
+        {
+            prefix=commonPrefixUtil(prefix,strs[i]); //prefix takes common prefix from strings
+        }
+        
+        return prefix;
+        
+    
+        
+    }
+        
+  
+
+     
+   
+        
+
+        
+
+    
+}
